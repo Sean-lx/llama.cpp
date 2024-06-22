@@ -823,14 +823,6 @@ if (GGML_CUDA)
     endif()
 endif()
 
-if (WIN32)
-    add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
-
-    if (BUILD_SHARED_LIBS)
-        set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-    endif()
-endif()
-
 if (GGML_LTO)
     include(CheckIPOSupported)
     check_ipo_supported(RESULT result OUTPUT output)
@@ -841,6 +833,7 @@ if (GGML_LTO)
     endif()
 endif()
 
+# TODO: should not be set globally
 if (GGML_CCACHE)
     find_program(GGML_CCACHE_FOUND ccache)
 
@@ -1096,6 +1089,15 @@ if (CMAKE_SYSTEM_NAME MATCHES "NetBSD")
 endif()
 if (CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
     add_compile_definitions(_BSD_SOURCE)
+endif()
+
+# TODO: should not use this
+if (WIN32)
+    add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
+
+    if (BUILD_SHARED_LIBS)
+        set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+    endif()
 endif()
 
 #
