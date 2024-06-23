@@ -1,6 +1,10 @@
 import Foundation
 import llama
 
+extension OpaquePointer: @unchecked Sendable {
+  
+}
+
 enum LlamaError: Error {
     case couldNotInitializeContext
 }
